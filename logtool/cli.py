@@ -10,12 +10,12 @@ from .report import save_report
 def main():
 	parser = argparse.ArgumentParser(description="CLI-утилита для фильтрации и анализа логов")
 
-	parser.add_argument("file", help="Путь к лог-файлу")
-	parser.add_argument("--filter", nargs = "+", help="Фильтр по ключевому слову")
-	parser.add_argument("--level", help="Фильтр по уровню (INFO, ERROR, WARNING и т.д.)")
-	parser.add_argument("--summary", action="store_true", help="Показать статистику по уровням")
-	parser.add_argument("--save-json", action="store_true", help="Сохранить статистику в JSON")
-	parser.add_argument("--save-csv", action="store_true", help="Сохранить статистику в CSV")
+	parser.add_argument("file", help="Path to log file")
+	parser.add_argument("--filter", nargs = "+", help="Keyword filter")
+	parser.add_argument("--level", help="Filter by level (INFO, ERROR, WARNING ...)")
+	parser.add_argument("--summary", action="store_true", help="Show statistics by level")
+	parser.add_argument("--save-json", action="store_true", help="Save statistics in JSON")
+	parser.add_argument("--save-csv", action="store_true", help="Save statistics in CSV")
 	args = parser.parse_args()
 
 	log_path = Path(args.file)
@@ -29,7 +29,7 @@ def main():
 	print("\n".join(filtered_lines))
 
 	if args.summary:
-		print("\nСтатистика по уровням:")
+		print("\nStatistics by level:")
 		for level, count in stats.items():
 			print(f"{level:10} {count}")
 
@@ -38,7 +38,7 @@ def main():
 		reports_dir.mkdir(exist_ok=True)
 
 		save_report(stats, reports_dir, to_json=args.save_json, to_csv=args.save_csv)
-		print(f"\nОтчёт сохранён в директорию: {reports_dir}")
+		print(f"\nThe report has been saved to the directory: {reports_dir}")
 
 if __name__ == "__main__":
 	main()

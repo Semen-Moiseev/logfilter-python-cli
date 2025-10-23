@@ -7,7 +7,7 @@ from pathlib import Path
 
 def save_report(stats, reports_dir, to_json=False, to_csv=False):
 	if not stats:
-		print("Нет данных для сохранения!")
+		print("No data to save!")
 		return
 
 	timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
