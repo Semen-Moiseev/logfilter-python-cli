@@ -45,8 +45,7 @@ cd logfilter-python-cli
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate     # Windows
-source .venv/bin/activate  # macOS / Linux
+.venv\Scripts\activate
 ```
 
 ### 3. Установите зависимости
