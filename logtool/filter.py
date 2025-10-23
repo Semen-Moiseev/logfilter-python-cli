@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-def filter_logs(file_path, keywords=None):
+def filter_logs(file_path, keywords=None, level=None):
 	file = Path(file_path)
 
 	with file.open("r", encoding="utf-8") as f:
@@ -10,5 +10,7 @@ def filter_logs(file_path, keywords=None):
 
 	if keywords:
 		lines = [l for l in lines if keywords.lower() in l.lower()]
+	if level:
+		lines = [l for l in lines if level.upper() in l]
 
 	return lines

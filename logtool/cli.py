@@ -10,6 +10,7 @@ def main():
 
 	parser.add_argument("file", help="Путь к лог-файлу")
 	parser.add_argument("--filter", help="Фильтр по ключевому слову")
+	parser.add_argument("--level", help="Фильтр по уровню (INFO, ERROR, WARNING и т.д.)")
 	args = parser.parse_args()
 
 	log_path = Path(args.file)
@@ -17,7 +18,7 @@ def main():
 		print(f"The file {log_path} was not found!")
 		return
 
-	filtered_lines = filter_logs(log_path, keywords=args.filter)
+	filtered_lines = filter_logs(log_path, keywords=args.filter, level=args.level)
 	print("\n".join(filtered_lines))
 
 if __name__ == "__main__":
