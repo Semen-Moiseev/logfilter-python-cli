@@ -6,9 +6,11 @@
 
 ## Возможности
 
-- Фильтрация логов по нескольким ключевым словам (`ERROR`, `WARNING`, `INFO`, и т.д.)
+- Фильтровать логи по ключевым словам и уровням (`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`)
+- Анализировать количество логов по уровням
+- Выводить статистику в консоль
+- Сохранять статистику в JSON и CSV
 - Простое использование из командной строки
-- Возможность запуска через `python -m logfilter`
 - Минимальные зависимости — только стандартная библиотека
 
 ---
@@ -18,14 +20,14 @@
 ```
 logfilter-python-cli/
 ├── .venv/                # Виртуальное окружение
-├── logfilter/
-│ ├── __init__.py
-│ └── log_filter.py       # Основная логика CLI-утилиты
-├── scripts/
-│ ├── run_log_filter.bat  # Батник для Windows
-│
-├── tests/
-│ └── test_log_filter.log # Тестовый лог-файл
+├── logtool/
+│   ├── __init__.py
+│   ├── cli.py
+│   ├── filter.py
+│   ├── analyzer.py
+│   └── report.py
+├── data/
+│ └── logs.log            # Тестовый лог-файл
 ├── requirements.txt
 └── README.md
 ```
@@ -45,13 +47,8 @@ cd logfilter-python-cli
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
-```
-
-### 3. Установите зависимости
-
-```bash
-pip install -r requirements.txt
+.venv\Scripts\activate     # Windows
+source .venv/bin/activate  # Linux / macOS
 ```
 
 ## Использование
@@ -59,14 +56,14 @@ pip install -r requirements.txt
 ### 1. Напрямую через Python
 
 ```bash
-python logfilter/log_filter.py tests\test_log_filter.log ERROR WARNING
+python -m logtool.cli <лог-файл>
 ```
 
-### 2. Через BAT / PowerShell
+Аргументы:
 
-```bash
-scripts\run_log_filter.bat tests\test_log_filter.log ERROR WARNING
-# или
-.\scripts\run_log_filter.ps1 tests\test_log_filter.log ERROR WARNING
-
-```
+- file — путь к лог-файлу (обязательный)
+- --filter — ключевое слово или несколько через пробел
+- --level — уровень логов (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+- --summary — вывод статистики в консоль
+- --save-json — сохраняет статистику в JSON
+- --save-csv — сохраняет статистику в CSV
