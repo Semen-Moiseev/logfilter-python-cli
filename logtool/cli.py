@@ -9,7 +9,7 @@ def main():
 	parser = argparse.ArgumentParser(description="CLI-утилита для фильтрации и анализа логов")
 
 	parser.add_argument("file", help="Путь к лог-файлу")
-	parser.add_argument("--filter", help="Фильтр по ключевому слову")
+	parser.add_argument("--filter", nargs = "+", help="Фильтр по ключевому слову")
 	parser.add_argument("--level", help="Фильтр по уровню (INFO, ERROR, WARNING и т.д.)")
 	args = parser.parse_args()
 

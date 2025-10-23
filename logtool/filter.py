@@ -9,7 +9,10 @@ def filter_logs(file_path, keywords=None, level=None):
 		lines = [line.strip() for line in f if line.strip()]
 
 	if keywords:
-		lines = [l for l in lines if keywords.lower() in l.lower()]
+		if isinstance(keywords, str):
+			keywords = [keywords]
+
+		lines = [l for l in lines if any(k.lower() in l.lower() for k in keywords)]
 	if level:
 		lines = [l for l in lines if level.upper() in l]
 
