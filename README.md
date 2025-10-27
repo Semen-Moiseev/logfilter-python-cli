@@ -43,7 +43,7 @@ git clone https://github.com/<your-username>/logfilter-python-cli.git
 cd logfilter-python-cli
 ```
 
-### 2. Создайте и активируйте виртуальное окружение
+### 2.1. Создайте и активируйте виртуальное окружение
 
 ```bash
 python -m venv .venv
@@ -51,12 +51,28 @@ python -m venv .venv
 source .venv/bin/activate  # Linux / macOS
 ```
 
+### 2.2. Сборка docker образа
+
+```bash
+docker build -t logtool-cli .
+```
+
 ## Использование
 
 ### 1. Напрямую через Python
 
 ```bash
-python -m logtool.cli <лог-файл>
+python -m logtool.cli <аргументы>
+
+python -m logtool.cli data/logs.log --filter user --summary --save-json
+```
+
+### 2. Через Docker
+
+```bash
+docker run --rm -it logtool-cli <аргументы>
+
+docker run --rm -it logtool-cli data/logs.log --filter user --summary --save-json
 ```
 
 Аргументы:
