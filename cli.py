@@ -3,9 +3,9 @@
 import argparse
 from pathlib import Path
 
-from .filter import filter_logs
-from .analyzer import analyze_logs
-from .report import save_report
+from logtool.filter import filter_logs
+from logtool.analyzer import analyze_logs
+from logtool.report import save_report
 
 def main():
 	parser = argparse.ArgumentParser(description="CLI-утилита для фильтрации и анализа логов")
